@@ -105,12 +105,21 @@
                     "name": "FaceRecognition",
                     "pattern": "",
                     "target": "faceRecognition"
+                },
+                {
+                    "name": "InferenceResult",
+                    "pattern": "result",
+                    "target": "inferenceResult"
                 }
             ],
             "targets": {
                 "faceRecognition": {
                     "viewName": "FaceRecognition",
                     "viewLevel": 0
+                },
+                "inferenceResult": {
+                    "viewName": "InferenceResult",
+                    "viewLevel": 1
                 }
             },
             "headerWhiteList": [

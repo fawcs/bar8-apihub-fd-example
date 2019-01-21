@@ -23,38 +23,32 @@ sap.ui.define([
         },
         
         _generateRequest(oEvent,oBusyIndicator){
-
-            var img = oEvent.getParameters().files[0]
-
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                var file = e.target.result;
-
-                var sHeaders = {"content-type":"multipart/form-data","APIKey":"jqgT31xhkdDcAwr7YCjtIYd6ATphPaaf"};
-                var data = new FormData();
-                data.set('files', file );
-                
-                var oData = { 'files': file };
-                
-                var oModel = new sap.ui.model.json.JSONModel();
-
-                console.log({ oData });
-
-                oModel.loadData("https://sandbox.api.sap.com/ml/facedetection/face-detection", data , false, "POST", null, false, sHeaders);
-                
-                oModel.attachRequestCompleted(function(oEvent){
-                    var oData = oEvent.getSource().oData;
-                    console.log(oData);
-                    oBusyIndicator.close();
-                });
-
-            }
-
-            reader.read(img);
-			
-        }
-        
+            
+            var image = oEvent.getParameters().files[0]
+            
+            var form = new FormData();
+            form.append('files', image );
+            
+            var sHeaders = {"APIKey":"jqgT31xhkdDcAwr7YCjtIYd6ATphPaaf"};
+            $.ajax({
+                "url": "https://sandbox.api.sap.com/ml/facedetection/face-detection",
+                "method": "POST",
+                "headers": sHeaders,
+                "processData": false,
+                "contentType": false,
+                "mimeType": "multipart/form-data",
+                "data": form, 
+            })
+            .done(function(res){
+                console.log(res);
+            })
+            .fail(function(res){
+                console.log(res.responseText);
+            })
+            .always(function(){
+                oBusyIndicator.close();
+            })
+        }   
         
     });
 });
