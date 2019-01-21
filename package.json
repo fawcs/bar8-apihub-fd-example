@@ -1,0 +1,16 @@
+{
+  "name": "bar8ml_facedetection",
+  "version": "1.0.0",
+  "description": "A SAPUI5 application to consume a Face Detection API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Adriano S. Campanhola",
+  "license": "ISC",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "cors": "^2.8.5",
+    "express": "^4.16.4"
+  }
+}

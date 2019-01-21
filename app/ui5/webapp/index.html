@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bar8 - Face Detection API</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/image.css">
+    <link rel='shortcut icon' href='./images/favicon.ico'>
+    <link rel='icon' sizes='16x16 32x32 64x64' href='./images/favicon.ico'>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <!-- Bootstrap the UI5 core library -->
+    <script id="sap-ui-bootstrap" 
+            src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" 
+            data-sap-ui-libs="sap.ushell, sap.collaboration"
+            data-sap-ui-theme="sap_belize_plus" 
+            data-sap-ui-compatVersion="edge" 
+            data-sap-ui-resourceroots='{"sap.mlf.bar8": "./"}'>
+    </script>
+    
+    <script>
+        sap.ui.getCore().attachInit(function () {
+            new sap.m.Shell({
+                app: new sap.ui.core.ComponentContainer({
+                    height: "100%",
+                    name: "sap.mlf.bar8",
+                    manifest: true
+                })
+            }).placeAt("content");
+        });
+    </script>
+</head>
+
+<body>
+    <div class="sapUiBody" id="content">
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<core:View 
+    xmlns:m="sap.m" 
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified" 
+    controllerName="sap.mlf.bar8.controller.FaceRecognition">
+    <m:Page title="{i18n>appTitle}" showHeader="true">
+        <m:FlexBox 
+            id="flexBoxHint" 
+            width="100%" 
+            visible="false" 
+            alignItems="Center" 
+            justifyContent="Center">
+            
+            <m:Title 
+                level="H3" 
+                text="{i18n>errorUpload}" 
+                class="imageErrorTitle " />
+
+            <m:Text 
+                width="100%" 
+                text="{i18n>msgUploadImage}">
+            </m:Text>
+        </m:FlexBox>
+
+        <m:FlexBox 
+                id="uploadBox" 
+                class="workListBox" 
+                alignItems="Center" 
+                justifyContent="Center" 
+                width="100%" 
+                height="100%" 
+                visible="true">
+                <u:FileUploader 
+                    id="fileUploader" 
+                    name="myFileUpload" 
+                    tooltip="{i18n>uploadImage}" 
+                    typeMissmatch="handleTypeMissmatch" 
+                    class="fileUploaderStyle" 
+                    buttonOnly="true" 
+                    change="handleValueChange" 
+                    fileType="jpg,jpeg,png" 
+                    placeholder="{i18n>chooseFile}" 
+                    buttonText="Browse" 
+                    style="Transparent" 
+                    icon="sap-icon://camera" 
+                    iconOnly="true">
+                </u:FileUploader>
+                <m:FlexBox 
+                    id="vBoxImage" 
+                    width="100%" 
+                    visible="false" 
+                    alignItems="Center" 
+                    justifyContent="Center">
+                    <m:items>
+                        <m:Image src="{/image}" densityAware="false" class="imagevh"></m:Image>
+                    </m:items>
+                </m:FlexBox>
+            </m:FlexBox>
+    </m:Page>
+</core:View>
