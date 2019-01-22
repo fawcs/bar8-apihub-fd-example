@@ -1,0 +1,20 @@
+
+<core:View 
+    xmlns:m="sap.m" 
+    xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified" 
+    controllerName="sap.mlf.bar8.controller.InferenceResult">
+    <m:Page title="{i18n>appTitle}" showHeader="true">
+        <m:FlexBox
+            id="BoxImage" 
+            width="100%" 
+            visible="true" 
+            alignItems="Center" 
+            justifyContent="Center">
+            <m:Image
+                id="uploadedImage"
+                densityAware="false" >
+            </m:Image>
+        </m:FlexBox>
+    </m:Page>
+</core:View>

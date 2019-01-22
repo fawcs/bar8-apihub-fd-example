@@ -1,6 +1,6 @@
 sap.ui.define([
-    'sap/ui/core/mvc/Controller'
-], function(Controller) {
+    'sap/ui/core/mvc/Controller',
+], function(Controller,) {
     'use strict';
     return Controller.extend("sap.mlf.bar8.controller.FaceRecognition",{
         
@@ -12,8 +12,6 @@ sap.ui.define([
             var oBusyIndicator = new sap.m.BusyDialog();
             oBusyIndicator.open();
             
-            
-            var oView = this.getView();
             if (oEvent.getParameters().files[0]) {
                 this._generateRequest(oEvent,oBusyIndicator);
             } else {
@@ -39,7 +37,9 @@ sap.ui.define([
                 "mimeType": "multipart/form-data",
                 "data": form, 
             })
-            .done(function(res){
+            .done((res) => {
+                sap.ui.getCore().setModel({image: image, response: res}, 'InferenceResults');
+                this.getOwnerComponent().getRouter().navTo("InferenceResult");
                 console.log(res);
             })
             .fail(function(res){
