@@ -25,17 +25,28 @@ sap.ui.define([
             var image = oEvent.getParameters().files[0]
             
             var form = new FormData();
-            form.append('files', image, image.name );
+            form.append('files', image );
             
-            var oModel = new sap.ui.model.json.JSONModel();
-            
-            var sHeaders = {"content-type":"multipart/form-data", "APIKey":"<API_KEY>"};
-            oModel.loadData("https://sandbox.api.sap.com/ml/facedetection/face-detection", form, true, "POST", null, false, sHeaders);
-            
-            oModel.attachRequestCompleted(function(oEvent){
-                var oData = oEvent.getSource().oData;
-                console.log(oData);
-            });
+            var sHeaders = {"APIKey":"<API_KEY>"};
+            $.post({
+                "url": "https://sandbox.api.sap.com/ml/facedetection/face-detection",
+                "headers": sHeaders,
+                "processData": false,
+                "contentType": false,
+                "mimeType": "multipart/form-data",
+                "data": form, 
+            })
+            .done((res) => {
+                sap.ui.getCore().setModel({image: image, response: res}, 'InferenceResults');
+                this.getOwnerComponent().getRouter().navTo("InferenceResult");
+                console.log(res);
+            })
+            .fail(function(res){
+                console.log(res.responseText);
+            })
+            .always(function(){
+                oBusyIndicator.close();
+            })
         }   
         
     });
