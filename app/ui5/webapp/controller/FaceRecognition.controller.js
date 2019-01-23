@@ -16,7 +16,7 @@ sap.ui.define([
                 this._generateRequest(oEvent,oBusyIndicator);
             } else {
                 oBusyIndicator.close();
-                //TO-DO - errorrrr
+                //TO-DO - handle error properly
             }
         },
         
@@ -25,29 +25,17 @@ sap.ui.define([
             var image = oEvent.getParameters().files[0]
             
             var form = new FormData();
-            form.append('files', image );
+            form.append('files', image, image.name );
             
-            var sHeaders = {"APIKey":"jqgT31xhkdDcAwr7YCjtIYd6ATphPaaf"};
-            $.ajax({
-                "url": "https://sandbox.api.sap.com/ml/facedetection/face-detection",
-                "method": "POST",
-                "headers": sHeaders,
-                "processData": false,
-                "contentType": false,
-                "mimeType": "multipart/form-data",
-                "data": form, 
-            })
-            .done((res) => {
-                sap.ui.getCore().setModel({image: image, response: res}, 'InferenceResults');
-                this.getOwnerComponent().getRouter().navTo("InferenceResult");
-                console.log(res);
-            })
-            .fail(function(res){
-                console.log(res.responseText);
-            })
-            .always(function(){
-                oBusyIndicator.close();
-            })
+            var oModel = new sap.ui.model.json.JSONModel();
+            
+            var sHeaders = {"content-type":"multipart/form-data", "APIKey":"<API_KEY>"};
+            oModel.loadData("https://sandbox.api.sap.com/ml/facedetection/face-detection", form, true, "POST", null, false, sHeaders);
+            
+            oModel.attachRequestCompleted(function(oEvent){
+                var oData = oEvent.getSource().oData;
+                console.log(oData);
+            });
         }   
         
     });

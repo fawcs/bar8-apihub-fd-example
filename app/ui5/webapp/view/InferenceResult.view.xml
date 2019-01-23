@@ -7,12 +7,14 @@
     <m:Page title="{i18n>appTitle}" showHeader="true">
         <m:FlexBox
             id="BoxImage" 
-            width="100%" 
+            width="50%" 
+            height="50%" 
             visible="true" 
             alignItems="Center" 
             justifyContent="Center">
             <m:Image
                 id="uploadedImage"
+                height="50%" 
                 densityAware="false" >
             </m:Image>
         </m:FlexBox>
