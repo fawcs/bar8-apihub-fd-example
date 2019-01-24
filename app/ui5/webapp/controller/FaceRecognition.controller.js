@@ -27,19 +27,19 @@ sap.ui.define([
             var form = new FormData();
             form.append('files', image );
             
-            var sHeaders = {"APIKey":"<API_KEY>"};
-            $.post({
+            var sHeaders = {"APIKey":"jqgT31xhkdDcAwr7YCjtIYd6ATphPaaf"};
+            $.ajax({
                 "url": "https://sandbox.api.sap.com/ml/facedetection/face-detection",
                 "headers": sHeaders,
+                "method": "POST",
                 "processData": false,
                 "contentType": false,
                 "mimeType": "multipart/form-data",
                 "data": form, 
             })
-            .done((res) => {
-                sap.ui.getCore().setModel({image: image, response: res}, 'InferenceResults');
+            .done(res => {
+                sap.ui.getCore().setModel({image: image, response: JSON.parse(res)}, 'InferenceResults');
                 this.getOwnerComponent().getRouter().navTo("InferenceResult");
-                console.log(res);
             })
             .fail(function(res){
                 console.log(res.responseText);
