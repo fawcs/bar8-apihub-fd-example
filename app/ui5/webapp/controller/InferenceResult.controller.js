@@ -13,38 +13,26 @@ sap.ui.define([
             var path = URL.createObjectURL(image);
             
             console.log({uImg,path})
-            uImg.useMap = 'map1';
             uImg.setSrc(path)
-            
+
         },
-        
+
         _onImageLoad: function(context,results) {
             var oCanvas = document.createElement("canvas");
             var ctx = oCanvas.getContext("2d");
-            
+
             for( var i = 0; i < results.predictions[0].numberOfFaces; i++){
-            var oMap = new sap.ui.commons.ImageMap();
-            oMap.setName("map1");
-                context._drawBoundingBox(ctx,results.predictions[0].faces[i],"Area_"+i,map);
+                context._drawBoundingBox(ctx,results.predictions[0].faces[i]);
             }
         },
-        
-        _drawBoundingBox : function(ctx, item, name,map) {
-            var coords = ""+item.left+","+item.top+","+item.right - item.left +","+ item.bottom - item.top;
-            var aArea1 = new sap.ui.commons.Area (name, {
-                shape: "rect", 
-                alt: "Bee",
-                href: "http://www.sap.com",
-                coords: coords
-            });
-            map.addArea(aArea1);
-            map.placeAt("uploadedImage");
+
+        _drawBoundingBox : function(ctx, item ) {
             // draw the box
-            //ctx.strokeRect(item.left, item.top, item.right - item.left , item.bottom - item.top);
-            //ctx.fillStyle = 'red';
-            //ctx.save();
+            ctx.strokeRect(item.left, item.top, item.right - item.left , item.bottom - item.top);
+            ctx.fillStyle = 'red';
+            ctx.save();
         },
-        
+
         _drawCanvas : function(oController,oImage) {
             var oCanvas = document.createElement("canvas");
             var ctx = oCanvas.getContext("2d");
@@ -68,6 +56,6 @@ sap.ui.define([
             //oImg.style.display = "none";
             return ctx;
         },
-        
+
     })
 });
